@@ -1,0 +1,28 @@
+[{
+    "name": "home.test1",
+    "label": "Test 1",
+    "categories": ["Category A"],
+    "appUrl": "../app_1/index.html",
+    "url": "test1"
+},{
+    "label": "Test 2",
+    "categories": ["Category A", "Category B"],
+    "appUrl": "../app_2/index.html",
+    "url": "test2"
+},{
+    "label": "Test 2.2",
+    "categories": ["Category A", "Category B", "Category C"],
+    "appUrl": "../app_2/index.html",
+    "url": "test3"
+},{
+    "label": "Test External Embeded",
+    "categories": ["Category A"],
+    "appUrl": "http://wikipedia.com",
+    "url": "test4"
+},{
+    "label": "Test External Window",
+    "categories": ["Category A"],
+    "appUrl": "http://wikipedia.com",
+    "targetWindow": "_blank",
+    "url": "test5"
+}]
