@@ -17,12 +17,12 @@
 },{
     "label": "External App Embeded",
     "categories": ["Category A"],
-    "appUrl": "http://wikipedia.com",
+    "appUrl": "https://wikipedia.com",
     "url": "test4"
 },{
     "label": "External App New Window",
     "categories": ["Category A"],
-    "appUrl": "http://wikipedia.com",
+    "appUrl": "https://wikipedia.com",
     "targetWindow": "_blank",
     "url": "test5"
 },{
