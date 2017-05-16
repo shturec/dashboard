@@ -1,0 +1,126 @@
+html, body, div[ui-view]{
+	height:100%
+}
+body {
+	overflow: hidden;
+	margin: 0;
+	padding-top: 70px;
+}
+div[ui-view] {
+	display:flex;
+	flex-direction: column;
+}
+div[ui-view]>div.container-fluid {
+	overflow-x: hidden;
+	overflow-y:auto;
+}
+a {
+	color: #333;
+}
+a:visited, a:hover, a:active, a:focus {
+	text-decoration:none;
+	color: #333;
+}
+
+@media (min-width: 768px){
+	.navbar-center {
+	    position: relative;
+		left: 50%;
+	    margin-top: inherit;
+	    margin-bottom: inherit;
+	}
+}
+
+.navbar-center {
+	position: relative;
+	left: 45%;
+}
+
+/*HOME*/
+.scroll-tab-nav {
+	border-bottom: 1px solid #999;	
+}
+.scroll-tab-nav > .scroll-tab-nav-item {
+	margin-left: 5px;
+}
+.scroll-tab-nav a, .scroll-tab-nav a:visited, .scroll-tab-nav a:not(.active):hover {
+	text-decoration:none;
+	color: #337ab7;
+}
+.scroll-tab-nav a.active:hover, .scroll-tab-nav a:focus, .scroll-tab-nav a:active, .scroll-tab-nav a.active{
+	color: #23527c;
+}
+.scroll-tab-nav > .active { 
+	font-weight: bold;
+	border-bottom-color: #666;
+}
+
+.scroll-tab-content {
+	display: flex;
+	flex-direction: column;
+	margin-left: -15px;
+	margin-right: -15px;
+}
+.scroll-tab-content:after{
+	content:'';
+	margin-bottom: calc(100vh + 40rem);
+}
+
+.scroll-tab-pane {
+	margin-bottom: 10px;
+}
+.scroll-tab-pane:first-child > .title {
+	display: none;
+}
+.scroll-tab-pane > .tiles-list {
+	display: flex;
+	flex-flow: wrap;
+}
+
+.scroll-tab-pane .tile {
+	margin: 15px 5px;
+	font-variant: small-caps;
+	min-width: 11rem;
+	width: 11rem;
+	height: 11rem; 
+	min-height: 11rem; 		
+	background: #fff; 
+	border: 1px solid #ccc;
+}
+
+.tile.thumbnail{
+	padding: 0;
+}
+
+.tile .tile-content{
+	height: 100%;
+    width: 100%;
+    padding: 4px;
+}
+
+.tile iframe {
+	border: 0;
+}
+
+.overlay-container {
+	position: relative;
+}
+
+.overlay-link {
+	position: absolute;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    opacity: 0;
+}
+
+/*APP*/
+.content-frame {
+ 	width:100%; 
+ 	height:100%; 
+ 	min-height:100%; 
+ 	background: #fff;
+  	border: 0; 
+}
