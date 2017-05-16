@@ -26,7 +26,8 @@
     "targetWindow": "_blank",
     "url": "test5"
 },{
-    "categories": ["Category D"],
+    "label": "Custom Tile App",
+	"categories": ["Category D"],
     "tileUrl": "./apps/tile.html",
     "appUrl": "./apps/simple.html",
     "url": "app6"
