@@ -1,7 +1,7 @@
 (function(angular){
 "use strict";
 
-angular.module('', ['ui.router','duScroll','ui.bootstrap'])
+angular.module('dashboard', ['ui.router','duScroll','ui.bootstrap'])
 
 .provider('$lpState', function($stateProvider){
 	this.$get = function() {
