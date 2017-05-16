@@ -1,0 +1,158 @@
+<html>
+  <head>
+  	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+  	<style>	
+  		.long {
+  			background-color: #f6f6f6; border: 1px solid #666; padding: 15px;
+  			display: block;  		
+  			height: 1000px;
+  		}
+  		.short {
+  			background-color: #f6f6f6; border: 1px solid #666; padding: 15px;
+  		  	display: block;
+  			height: 200px;
+  		}
+  	</style>
+  </head>
+  <body>
+	<a href="#" id="shrink">Shrink with CSS</a>
+	<a href="#" id="expand">Epand with CSS</a>
+	<a href="#" id="shrinkStyle">Shrink with Style</a>
+	<a href="#" id="expandStyle">Expand with Style</a>	
+	<a href="#" id="shrinkJQ">Shrink with jQuery</a>
+	<a href="#" id="expandJQ">Expand with jQuery</a>	
+	<div class="short" id="content">
+		Hi, i'm app 2<br>
+		This is a long page to trigger height adjustment <br>
+		<button id="autoSenseEnableBtn" disabled>Enable auto-sense</button>
+		<button id="autoSenseDisableBtn">Disable auto-sense</button>
+	</div>  
+	
+	
+	<script>
+	
+		function EmbeddedFramePort(){
+			return this;
+		}
+		EmbeddedFramePort.prototype.constructor = EmbeddedFramePort;
+
+		EmbeddedFramePort.prototype.notifyDocumentResize = function (documentHeight){
+			var _height = documentHeight || document.body.scrollHeight;
+			if(!this.height || this.height!==_height){
+				this.height = _height;
+				var msg = {
+		        	height:_height
+		        };
+				top.postMessage(msg, 'http://localhost:8080');
+			}
+		};
+		
+		EmbeddedFramePort.prototype.autoTrackDocumentHeight = function(heightChangeHandlerFn){
+			if(arguments && arguments[0] === false){
+				this.heightObserver.disconnect();
+				return;
+			}
+			var MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
+			
+			this.heightObserver = new MutationObserver(function(mutations){
+				var handlerFn = heightChangeHandlerFn || EmbeddedFramePort.prototype.notifyDocumentResize;
+				var args = heightChangeHandlerFn?[mutation] : undefined;
+				mutations.forEach(function(mutation) {
+				    handlerFn.apply(this, args);
+				}); 
+			});
+			var target = document.body;
+			
+			this.heightObserver.observe(target, {
+					attributes            : true,
+		            attributeOldValue     : false,
+		            characterData         : true,
+		            characterDataOldValue : false,
+		            childList             : true,
+		            subtree               : true
+				});		
+		};
+		
+		EmbeddedFramePort.prototype.trackDocumentResize = function(){
+			//throttling notification on document resize event
+			var resizeTimeout;
+		  	window.addEventListener("resize", function(evt) {
+				// ignore resize events as long as an actualResizeHandler execution is in the queue
+			    if ( !resizeTimeout ) {
+			      resizeTimeout = setTimeout(function() {
+			        resizeTimeout = null;
+			        EmbeddedFramePort.prototype.notifyDocumentResize.call(this);
+			        // The actualResizeHandler will execute at a rate of 15fps
+			       }, 66);
+			    }
+			}.bind(this), false);
+		};
+		
+		EmbeddedFramePort.prototype.trackDocumentLoad = function(){
+			//send height once document loaded (initial set height)
+			var readyStateCheckInterval = setInterval(function() {
+			    if (document.readyState === "complete") {
+			        clearInterval(readyStateCheckInterval);
+			        EmbeddedFramePort.prototype.notifyDocumentResize.call(this);
+			    }
+			}.bind(this), 10);
+		};
+	</script>
+	
+	<script>
+		var
+		port = new EmbeddedFramePort();
+		port.trackDocumentLoad();
+		port.trackDocumentResize();
+		port.autoTrackDocumentHeight();
+		
+		$(document).ready(function(){
+		
+			$('#shrink').click(function(evt){
+				$('#content').attrRemove('style');
+				$('#content').addClass('short');
+			});
+			
+			$('#expand').click(function(evt){
+				$('#content').attrRemove('style');
+				$('#content').addClass('long');
+			});
+			
+			$('#shrinkStyle').click(function(evt){
+				$('#content').css({"display": "block", "height": "200px", "background-color": "#f6f6f6", "border": "1px solid #666", "padding": "15px"});
+			});
+			
+			$('#expandStyle').click(function(evt){
+				$('#content').css({"display": "block", "height": "1000", "background-color": "#f6f6f6", "border": "1px solid #666", "padding": "15px"});
+			});
+			
+			$('#shrinkJQ').click(function(evt){
+				$('#content').height(200);
+			});
+			
+			$('#expandJQ').click(function(evt){
+				$('#content').height(1000);
+			});
+		
+			$("#autoSenseEnableBtn").click(function(evt){
+				$(this).prop("disabled",true);
+				$("#autoSenseDisableBtn").prop("disabled",false);
+				port.autoTrackDocumentHeight();
+							
+			});
+			$("#autoSenseDisableBtn").click(function(evt){
+				$(this).prop("disabled",true);
+				$("#autoSenseEnableBtn").prop("disabled",false);
+				port.autoTrackDocumentHeight(false);
+				$("#expand").click(function(evt){
+					port.notifyDocumentResize();
+				});
+				$("#shrink").click(function(evt){
+					port.notifyDocumentResize();
+				});
+			});
+		});
+	</script>
+  </body>
+</html>
+

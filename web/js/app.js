@@ -1,7 +1,7 @@
 (function(angular){
 "use strict";
 
-angular.module('dashboard', ['ui.router','duScroll','ui.bootstrap'])
+angular.module('', ['ui.router','duScroll','ui.bootstrap'])
 
 .provider('$lpState', function($stateProvider){
 	this.$get = function() {
@@ -19,8 +19,8 @@ angular.module('dashboard', ['ui.router','duScroll','ui.bootstrap'])
 	return appDetails;
 })
 .config(function($stateProvider, $urlRouterProvider, $qProvider) {
-	
-	$qProvider.errorOnUnhandledRejections(false);//temporary to silence $q
+
+	$qProvider.errorOnUnhandledRejections(false);//temporary to silence $q	
 	
 	var homeState = {
 		name: 'home',
@@ -39,7 +39,7 @@ angular.module('dashboard', ['ui.router','duScroll','ui.bootstrap'])
 			    	var appStateNames = Object.keys($stateRegistry.states);
 			    	for(var i=0; i< appStateNames.length; i++){
 			    		var appState = $stateRegistry.states[appStateNames[i]];
-			    		if(appState.label){
+			    		if(['', 'home'].indexOf(appState.name)<0 && (appState.hpTile!==false || appState.hpTile=== undefined)){
 			    			if(!appState.categories || !appState.categories.length){
 			    				this.categories[0].tiles.push(appState);
 			    			} else {

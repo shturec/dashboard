@@ -1,0 +1,50 @@
+<h2>I am an app example for navigation options.</h2>
+
+<p>To navigate to another app in the same space, change the location path hash of the parent window to reflect the target app navigation path.</p>
+<h3>Examples:</h3>
+<ul>
+	<li>
+		<h4>Go to any other app in the same portal</h4>
+		<p>
+			Another app listed on the home page: <a href="#" onclick="top.window.location.hash='!/app2';">onclick="top.window.location.hash='!/app2';"</a>
+			<br>
+			Target app definition:
+			<pre>
+				{
+				    "label": "Dynamic Resize",
+				    "categories": ["Category A", "Category B"],
+				    "appUrl": "../app/dynamicsize.html",
+				    "url": "app2"
+				}
+			</pre>
+		</p>
+	</li>
+	<li>
+		<h4>Go to any other app in the same portal</h4>
+		<p>
+			Another app not-listed on the home page: <a href onclick="top.window.location.hash='!/app7';">onclick="top.window.location.hash='!/app7';"</a>
+			<br>
+			Target app definition:
+			<pre>
+				{
+				    "label": "Hidden App",
+				    "hpTile": false,
+				    "appUrl": "../app_2/hidden-app.html",
+				    "url": "app7"
+				}
+			</pre>
+		</p>
+	</li>
+	<li>
+		<h4>Go to another app with query parameters</h4>
+		<p>
+			<a href onclick="top.window.location.hash='!/app2##a/b/c?p1=1';">onclick="top.window.location.hash='!/app2##a/b/c?p1=1';"</a>			
+		</p>
+	</li>
+	<li>
+		<h4>Deeplink bookmark</h4>
+		<p>
+			<a target="_blank" href="http://localhost:8080/services/web/lp/index.html#!/app2##a/b/c?p1=1">http[s]://[host]:[port]/[path]/#!/app2##a/b/c?p1=1</a>
+		</p>
+	</li>
+</ul>

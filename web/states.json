@@ -1,28 +1,38 @@
 [{
     "name": "home.test1",
-    "label": "Test 1",
+    "label": "Navigation Options",
     "categories": ["Category A"],
-    "appUrl": "../app_1/index.html",
-    "url": "test1"
+    "appUrl": "../apps/simple.html",
+    "url": "app1"
 },{
-    "label": "Test 2",
+    "label": "Dynamic Resize",
     "categories": ["Category A", "Category B"],
-    "appUrl": "../app_2/index.html",
-    "url": "test2"
+    "appUrl": "../apps/dynamicsize.html",
+    "url": "app2"
 },{
-    "label": "Test 2.2",
+    "label": "Different Instance",
     "categories": ["Category A", "Category B", "Category C"],
-    "appUrl": "../app_2/index.html",
-    "url": "test3"
+    "appUrl": "../apps/simple.html",
+    "url": "app3"
 },{
-    "label": "Test External Embeded",
+    "label": "External App Embeded",
     "categories": ["Category A"],
     "appUrl": "http://wikipedia.com",
     "url": "test4"
 },{
-    "label": "Test External Window",
+    "label": "External App New Window",
     "categories": ["Category A"],
     "appUrl": "http://wikipedia.com",
     "targetWindow": "_blank",
     "url": "test5"
+},{
+    "categories": ["Category D"],
+    "tileUrl": "../apps/tile.html",
+    "appUrl": "../apps/simple.html",
+    "url": "app6"
+},{
+    "label": "Hidden App",
+    "hpTile": false,
+    "appUrl": "../apps/hidden-app.html",
+    "url": "app7"
 }]
